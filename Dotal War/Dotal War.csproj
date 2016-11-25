@@ -61,7 +61,6 @@
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Components\SelectionHandlerComponent.cs" />
     <Compile Include="Components\SpawnComponent.cs" />
-    <Compile Include="DONT.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
