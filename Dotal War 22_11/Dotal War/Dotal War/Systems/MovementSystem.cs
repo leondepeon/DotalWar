@@ -76,9 +76,13 @@ namespace Dotal_War.Systems
                 int currentIndex = (int)(updatingEntity.cBag[DataType.TargetIndex]);
                 float EntitySpeed = (float)(updatingEntity.cBag[DataType.Speed]);
                 bool IsMoveValid = (bool)(updatingEntity.cBag[DataType.IsMoveValid]);
+
                 #endregion
 
                 #region Update movement and Rotation
+
+
+
 
                 // checks whether Movement is alowed on this entity, then determains its current target location
                 if (IsMoveValid)
@@ -94,6 +98,7 @@ namespace Dotal_War.Systems
                         default:
                             break;
                     }
+
                 }
 
 
@@ -106,8 +111,8 @@ namespace Dotal_War.Systems
                 if (IsMoveValid)
                 {
                     position += (EntityDirection * EntitySpeed);
-                    EntityRectangle.X = (int)(position.X - ((Texture2D)(updatingEntity.cBag[DataType.Sprite])).Width / 2);
-                    EntityRectangle.Y = (int)(position.Y - ((Texture2D)(updatingEntity.cBag[DataType.Sprite])).Height / 2);
+                    EntityRectangle.X = (int)(position.X - ((Texture2D)(updatingEntity.cBag[DataType.Sprite])).Width);
+                    EntityRectangle.Y = (int)(position.Y - ((Texture2D)(updatingEntity.cBag[DataType.Sprite])).Height);
                 }
 
                 // checks whether entity has a healthbar and updates its position

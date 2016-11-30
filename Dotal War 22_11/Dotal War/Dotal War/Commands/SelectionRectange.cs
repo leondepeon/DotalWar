@@ -84,16 +84,16 @@ namespace Dotal_War
             {
                 //Top
                 spriteBatch.Draw(piksel, new Rectangle(GlobalVariable.mouseSelectionRectangle.X, GlobalVariable.mouseSelectionRectangle.Y,
-                    GlobalVariable.mouseSelectionRectangle.Width, Thickness), Color.White);
+                    GlobalVariable.mouseSelectionRectangle.Width, Thickness), Color.BlueViolet);
                 //Left
                 spriteBatch.Draw(piksel, new Rectangle(GlobalVariable.mouseSelectionRectangle.X, GlobalVariable.mouseSelectionRectangle.Y,
-                    Thickness, GlobalVariable.mouseSelectionRectangle.Height), Color.White);
+                    Thickness, GlobalVariable.mouseSelectionRectangle.Height), Color.BlueViolet);
                 //Bottom
                 spriteBatch.Draw(piksel, new Rectangle(GlobalVariable.mouseSelectionRectangle.X, (GlobalVariable.mouseSelectionRectangle.Y + GlobalVariable.mouseSelectionRectangle.Height),
-                    GlobalVariable.mouseSelectionRectangle.Width + 1, Thickness), Color.White);
+                    GlobalVariable.mouseSelectionRectangle.Width + 1, Thickness), Color.BlueViolet);
                 //Right
                 spriteBatch.Draw(piksel, new Rectangle((GlobalVariable.mouseSelectionRectangle.X + GlobalVariable.mouseSelectionRectangle.Width),
-                    GlobalVariable.mouseSelectionRectangle.Y, Thickness, GlobalVariable.mouseSelectionRectangle.Height), Color.White);
+                    GlobalVariable.mouseSelectionRectangle.Y, Thickness, GlobalVariable.mouseSelectionRectangle.Height), Color.BlueViolet);
             }
         }
     }

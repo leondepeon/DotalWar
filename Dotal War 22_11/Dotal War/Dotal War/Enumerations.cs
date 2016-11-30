@@ -14,6 +14,7 @@
         Position,
         Target,
         SpawnLocation,
+        
 
         #endregion
 
@@ -22,7 +23,6 @@
         IsMoveValid,
         IsSelected,
         IsHoverOver,
-        AllowCollision,
 
         #endregion
 
@@ -46,13 +46,20 @@
 
         #endregion
 
-        #region Misc
+        #region Enumeration
 
         EntityState,
         TargetType,
-        TargetIndex,
         SelectionType,
+        CollisionType,
+
+        #endregion
+
+        #region Misc
+
+        TargetIndex,
         SpawnRadius,
+
         #endregion
 
     }
@@ -75,6 +82,13 @@
     {
         Units,
         Buildings
+    }
+
+    public enum CollisionType
+    {
+        Static,
+        Dynamic,
+        Projectile,
     }
 
 }

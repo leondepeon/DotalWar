@@ -112,8 +112,10 @@ namespace Dotal_War.Systems
                     if ((bool)(updatingEntity.cBag[DataType.IsHoverOver])||(bool)(updatingEntity.cBag[DataType.IsSelected]))
                     {  spriteBatch.Draw(Piksel, (Rectangle)(updatingEntity.cBag[DataType.HealthRectangle]), Color.Green); }
                 }
+
                 spriteBatch.Draw(RenderSprite, Renderposition, null, RenderColor, RenderRotation, new Vector2(RenderSprite.Width/2,RenderSprite.Height/2),
                    globalVariables.universalScaleFactor , SpriteEffects.None, 0);
+
 
                 updatingEntity = null;
             }

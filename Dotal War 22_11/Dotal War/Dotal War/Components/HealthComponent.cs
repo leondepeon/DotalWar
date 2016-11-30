@@ -33,7 +33,7 @@ namespace Dotal_War.Components
 
             if (!target.cBag.ContainsKey(DataType.HealthRectangle))
             {
-                TempEntityCenter = new Vector2(((Rectangle)(target.cBag[DataType.DrawRectangle])).Center.X, ((Rectangle)(target.cBag[DataType.DrawRectangle])).Center.Y);
+                TempEntityCenter = (Vector2)(target.cBag[DataType.Position]);
                 TempBarRect = new Rectangle((int)(TempEntityCenter.X) - ((int)(InitialValue) / 3) / 2, (int)(TempEntityCenter.Y) - (CenterDist + Thickness / 2), (int)(InitialValue) / 3, Thickness);
                 target.cBag.Add(DataType.HealthRectangle, TempBarRect);
             }

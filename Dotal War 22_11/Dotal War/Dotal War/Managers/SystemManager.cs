@@ -15,7 +15,7 @@ namespace Dotal_War.Managers
         public MovementSystem sMovement;
         public HealthSystem sHealth;
         public SpawnSystem sSpawn;
-        //public CollisionSystem sCollision;
+        public CollisionSystem sCollision;
 
         #endregion
 
@@ -28,7 +28,7 @@ namespace Dotal_War.Managers
             sHealth = new HealthSystem(myGame);
             sMovement = new MovementSystem(myGame);
             sSpawn = new SpawnSystem(myGame);
-            //sCollision = new CollisionSystem(myGame);
+            sCollision = new CollisionSystem(myGame);
         }
 
         public void Run()
@@ -38,7 +38,7 @@ namespace Dotal_War.Managers
             sHealth.RunSystem();
             sMovement.RunSystem();
             sSpawn.RunSystem();
-            //sCollision.runSystem();
+            sCollision.runSystem();
         }
 
     }

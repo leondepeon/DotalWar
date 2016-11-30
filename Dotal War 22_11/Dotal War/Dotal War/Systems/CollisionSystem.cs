@@ -1,8 +1,10 @@
 ﻿using Dotal_War.Interfaces;
 using Dotal_War.Managers;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +16,11 @@ namespace Dotal_War.Systems
         #region Fields
 
         List<int> Subscribtions;
+        List<Entity> StaticSubs;
+        List<Entity> DynamicSubs;
+
         EntityManager EntityManager;
-        Entity updatingEntity;
         GlobalVariables GlobalVariables;
-
-        Rectangle[] SectorRectangle;
-        List<int>[] SectorSubs;
-
 
         #endregion
 
@@ -31,16 +31,8 @@ namespace Dotal_War.Systems
             EntityManager = myGame.EntityManager;
             GlobalVariables = myGame.globalVariables;
             Subscribtions = new List<int>();
-
-            SectorRectangle = new Rectangle[4]
-                {new Rectangle(0,0,GlobalVariables.WindowWidth/2,GlobalVariables.WindowHeight/2),
-                new Rectangle(GlobalVariables.WindowWidth / 2,0, GlobalVariables.WindowWidth / 2, GlobalVariables.WindowHeight / 2),
-                new Rectangle (0, GlobalVariables.WindowHeight / 2, GlobalVariables.WindowWidth / 2, GlobalVariables.WindowHeight / 2),
-                new Rectangle(GlobalVariables.WindowWidth/2, GlobalVariables.WindowHeight / 2, GlobalVariables.WindowWidth / 2, GlobalVariables.WindowHeight / 2)};
-            SectorSubs = new List<int>[4]
-                { new List<int>(),new List<int>(),new List<int>(),new List<int>()};
-
-
+            StaticSubs = new List<Entity>();
+            DynamicSubs = new List<Entity>();
         }
 
         #region Subscriber Management
@@ -60,44 +52,131 @@ namespace Dotal_War.Systems
 
         public void runSystem()
         {
-            foreach (int subs in Subscribtions)
+            foreach (int entity in Subscribtions)
             {
-                updatingEntity = EntityManager.GetEntity(subs);
-                Rectangle CollisionRectangle = (Rectangle)(updatingEntity.cBag[DataType.DrawRectangle]);
-
-                for (int i = 0; i < 4; i++)
+                if ((CollisionType)(EntityManager.GetEntity(entity).cBag[DataType.CollisionType]) == CollisionType.Static)
                 {
-                    if (CollisionRectangle.Intersects(SectorRectangle[i]))
-                    { SectorSubs[i].Add(subs); }
-
-                    if (!CollisionRectangle.Intersects(SectorRectangle[i])&& SectorSubs[i].Contains(subs))
-                    { SectorSubs[i].Remove(subs); }
+                    StaticSubs.Add(EntityManager.GetEntity(entity));
                 }
 
-                updatingEntity = null;
+                else if ((CollisionType)(EntityManager.GetEntity(entity).cBag[DataType.CollisionType]) == CollisionType.Dynamic)
+                {
+                    DynamicSubs.Add(EntityManager.GetEntity(entity));
+                }
             }
 
-            foreach (List<int> sector in SectorSubs)
+            foreach (Entity dynamic in DynamicSubs)
             {
-                if (sector.Count > 1)
+                Vector2 pos0 = (Vector2)dynamic.cBag[DataType.Position];
+                Rectangle rect0 = (Rectangle)dynamic.cBag[DataType.DrawRectangle];
+
+                for (int i = 0; i < StaticSubs.Count; i++)
                 {
-                    for (int i = 0; i < sector.Count - 1; i++)
+
+                    Vector2 pos1 = (Vector2)StaticSubs[i].cBag[DataType.Position];
+                    float dist = Vector2.Distance(pos0, pos1);
+
+                    if (dist < 100)
                     {
-                        for (int j = i + 1; j < sector.Count; j++)
+
+                        Rectangle rect1 = (Rectangle)StaticSubs[i].cBag[DataType.DrawRectangle];
+
+                        if (rect0.Intersects(rect1))
                         {
-                            if (((Rectangle)(EntityManager.GetEntity(sector[i]).cBag[DataType.DrawRectangle])).Intersects(((Rectangle)(EntityManager.GetEntity(sector[j]).cBag[DataType.DrawRectangle]))))
+                            dynamic.cBag[DataType.IsMoveValid] = false;
+                            dynamic.cBag[DataType.TargetIndex] = 0;
+                            dynamic.cBag[DataType.Target] = null;
+                            dynamic.cBag[DataType.TargetType] = TargetType.Empty;
+                        }
+                    }
+                    
+                }
+
+                for (int j = 0; j < DynamicSubs.Count; j++)
+                {
+                    Vector2 newPos0 = new Vector2();
+                    Vector2 newPos1 = new Vector2();
+
+
+                    Vector2 pos1 = (Vector2)DynamicSubs[j].cBag[DataType.Position];
+                    pos0 = (Vector2)dynamic.cBag[DataType.Position];
+                    float dist = Vector2.Distance(pos0, pos1);
+
+
+                    if (dist > 0 && dist < 25)
+                    {
+                        Rectangle rect1 = (Rectangle)DynamicSubs[j].cBag[DataType.DrawRectangle];
+
+                        if (rect0.Intersects(rect1))
+                        {
+                            if (rect0.Left > rect1.Right)
                             {
-                                GlobalVariables.universalScaleFactor = 3;
+                                newPos0.X = rect1.Right;
+                                newPos1.X = pos1.X;
                             }
+
+                            else if (rect0.Right < rect1.Left)
+                            {
+                                newPos0.X = rect1.Left;
+                                newPos1.X = pos1.X;
+                            }
+
+                            else
+                            {
+                                newPos0.X = pos0.X;
+                                newPos1.X = pos1.X;
+                            }
+
+                            if (rect0.Bottom > rect1.Top)
+                            {
+                                {
+                                    newPos0.Y = rect1.Top -5;
+                                    newPos1.Y = pos1.Y - -5;
+                                }
+                            }
+
+                            else if (rect0.Top < rect1.Bottom)
+                            {
+                                {
+                                    newPos0.Y = rect1.Bottom +5;
+                                    newPos1.Y = pos1.Y + 5;
+                                }
+                            }
+
+                            else
+                            {
+                                newPos0.Y = pos0.Y;
+                                newPos1.Y = pos1.Y;
+                            }
+
+                            rect0.X = (int)newPos0.X - ((Texture2D)(dynamic.cBag[DataType.Sprite])).Width;
+                            rect0.Y = (int)newPos0.Y - ((Texture2D)(dynamic.cBag[DataType.Sprite])).Height;
+                            rect1.X = (int)newPos1.X - ((Texture2D)(DynamicSubs[j].cBag[DataType.Sprite])).Width;
+                            rect1.Y = (int)newPos1.Y - ((Texture2D)(DynamicSubs[j].cBag[DataType.Sprite])).Height;
+                            
+
+                            dynamic.cBag[DataType.Position] = newPos0;
+                            dynamic.cBag[DataType.DrawRectangle] = rect0;
+                            DynamicSubs[j].cBag[DataType.Position] = newPos1;
+                            DynamicSubs[j].cBag[DataType.DrawRectangle] = rect1;
+
 
                         }
                     }
                 }
+
             }
 
 
-        }
 
+
+
+
+            StaticSubs.Clear();
+            DynamicSubs.Clear();
+
+
+        }
         #endregion
 
 

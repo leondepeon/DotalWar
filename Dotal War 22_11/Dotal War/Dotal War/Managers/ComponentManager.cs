@@ -23,7 +23,7 @@ namespace Dotal_War.Managers
         public MovementComponent cMovement;
         public HealthComponent cHealth;
         public SpawnComponent cSpawn;
-        //public CollisionComponent cCollision;
+        public CollisionComponent cCollision;
 
 
         #endregion
@@ -41,7 +41,7 @@ namespace Dotal_War.Managers
             components.Add(cMovement = new MovementComponent(systemsManager.sMovement));
             components.Add(cHealth = new HealthComponent(systemsManager.sHealth));
             components.Add(cSpawn = new SpawnComponent(systemsManager.sSpawn));
-            //components.Add(cCollision = new CollisionComponent(systemsManager.sCollision));
+            components.Add(cCollision = new CollisionComponent(systemsManager.sCollision));
 
         }
 

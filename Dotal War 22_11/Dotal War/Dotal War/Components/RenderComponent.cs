@@ -41,13 +41,13 @@ namespace Dotal_War.Components
 
             if (!target.cBag.ContainsKey(DataType.DrawRectangle))
             {
-            drawRectangle = new Rectangle((int)(Position.X) - sprite.Width / 2, (int)(Position.Y) - sprite.Height / 2, sprite.Width, sprite.Height);
+            drawRectangle = new Rectangle((int)(Position.X) - sprite.Width, (int)(Position.Y) - sprite.Height, sprite.Width, sprite.Height);
             target.cBag.Add(DataType.DrawRectangle, drawRectangle);
             }
 
             if (!target.cBag.ContainsKey(DataType.defaultColor))
             {
-            target.cBag.Add(DataType.defaultColor, Color.White);
+            target.cBag.Add(DataType.defaultColor, Color.Black);
             }
 
             mySystem.Subscribe(target.entityID);

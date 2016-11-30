@@ -1,4 +1,5 @@
 ﻿using Dotal_War.Interfaces;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace Dotal_War.Components
 
         void IComponent.AddComponent(Entity target, object InitialValue)
         {
-            if (!target.cBag.ContainsKey(DataType.AllowCollision))
+            if (!target.cBag.ContainsKey(DataType.CollisionType))
             {
-                target.cBag.Add(DataType.AllowCollision, InitialValue);
+                target.cBag.Add(DataType.CollisionType, InitialValue);
             }
 
             mySystem.Subscribe(target.entityID);
