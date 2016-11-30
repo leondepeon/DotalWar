@@ -33,9 +33,9 @@ namespace Dotal_War.Components
                 target.cBag.Add(DataType.IsMoveValid, false);
             }
 
-            if (!target.cBag.ContainsKey(DataType.Target))
+            if (!target.cBag.ContainsKey(DataType.TargetList))
             {
-                target.cBag.Add(DataType.Target, new List<Vector2>());
+                target.cBag.Add(DataType.TargetList, new List<Vector2>());
             }
 
             if (!target.cBag.ContainsKey(DataType.TargetType))

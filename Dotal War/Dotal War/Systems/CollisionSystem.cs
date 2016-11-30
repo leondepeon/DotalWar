@@ -85,7 +85,7 @@ namespace Dotal_War.Systems
                         {
                             dynamic.cBag[DataType.IsMoveValid] = false;
                             dynamic.cBag[DataType.TargetIndex] = 0;
-                            dynamic.cBag[DataType.Target] = null;
+                            dynamic.cBag[DataType.TargetList] = null;
                             dynamic.cBag[DataType.TargetType] = TargetType.Empty;
                         }
                     }
@@ -159,8 +159,6 @@ namespace Dotal_War.Systems
                             dynamic.cBag[DataType.DrawRectangle] = rect0;
                             DynamicSubs[j].cBag[DataType.Position] = newPos1;
                             DynamicSubs[j].cBag[DataType.DrawRectangle] = rect1;
-
-
                         }
                     }
                 }

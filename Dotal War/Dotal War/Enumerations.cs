@@ -12,7 +12,6 @@
         #region Vectors
 
         Position,
-        Target,
         SpawnLocation,
         
 
@@ -55,6 +54,12 @@
 
         #endregion
 
+        #region Collections
+
+        TargetList,
+
+        #endregion
+
         #region Misc
 
         TargetIndex,
@@ -89,6 +94,13 @@
         Static,
         Dynamic,
         Projectile,
+    }
+
+    public enum MouseAction
+    {
+        Release,
+        Hold,
+        Empty,
     }
 
 }

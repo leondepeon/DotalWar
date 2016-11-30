@@ -68,3 +68,34 @@ C:\Users\Florian\Source\Repos\DotalWar\Dotal War 22_11\Dotal War\Dotal War\obj\x
 C:\Users\Florian\Source\Repos\DotalWar\Dotal War 22_11\Dotal War\Dotal War\obj\x86\Debug\Dotal War.pdb
 C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\obj\x86\Debug\Dotal War.exe
 C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\obj\x86\Debug\Dotal War.pdb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\obj\x86\Debug\Dotal War.csprojResolveAssemblyReference.cache
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Buttons\OptB.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Buttons\PlayB.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Buttons\QuitB.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Fonts\VersionFont.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Graphics\Mouse0.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Graphics\Piksel.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Graphics\StaticBlock.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Content\Graphics\Unit0.xnb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Dotal War.exe
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\Dotal War.pdb
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\Users\Florian\Source\Repos\DotalWar\Dotal War\Dotal War\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml

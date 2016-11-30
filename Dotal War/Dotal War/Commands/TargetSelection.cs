@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Dotal_War.Interfaces;
+using Dotal_War.Systems;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,21 @@ namespace Dotal_War.Commands
 {
     public class TargetSelection
     {
-        Game1 myGame;
-        ButtonState RightPS;
+        MovementSystem system;
         List<Vector2> TList;
-        bool isSwiping = false;
-        bool FirstTime = true;
+        MouseAction rightAction;
+        Vector2 mouseVector;
+        ButtonState rightPrevious;
+
+        bool reset = false;
+        bool shiftPressed = false;
 
         public TargetSelection (Game1 myGame)
         {
-            this.myGame = myGame;
+            system = myGame.SystemManager.sMovement;
             TList = new List<Vector2>();
+            mouseVector = new Vector2();
+            
         }
 
 
@@ -27,32 +34,52 @@ namespace Dotal_War.Commands
         {
             MouseState mouse = Mouse.GetState();
             KeyboardState keyboad = Keyboard.GetState();
+            rightAction = mouseActionState(mouse, keyboad);
+            mouseVector.X = mouse.X;
+            mouseVector.Y = mouse.Y;
 
-            if (mouse.RightButton == ButtonState.Released && RightPS == ButtonState.Pressed && !keyboad.IsKeyDown(Keys.LeftShift) && !isSwiping)
+            // Determain state of RightButton
+            switch (rightAction)
             {
-                TList.Clear(); 
-                TList.Add(new Vector2(mouse.X, mouse.Y));
-                myGame.SystemManager.sMovement.SetTarget(TList, TargetType.Individual);
+                case MouseAction.Release:
+                    TList.Add(mouseVector);
+                    system.SetTarget(TList);
+                    reset = true;
+                    break;
+                case MouseAction.Hold:
+                    TList.Add(mouseVector);
+                    break;
+                default:
+                    break;
             }
 
-            if (mouse.RightButton == ButtonState.Pressed && keyboad.IsKeyDown(Keys.LeftShift))
+
+
+            // Reset TargetList
+            if (reset)
             {
-                if (FirstTime)
-                {
-                    TList.Clear();
-                    FirstTime = false;
-                }
-                TList.Add(new Vector2(mouse.X, mouse.Y));
-                isSwiping = true;
+                TList.Clear();
+                reset = false;
+            }
+            rightPrevious = mouse.RightButton;
+
+        }
+
+        private MouseAction mouseActionState(MouseState mouse, KeyboardState keyboard)
+        {
+            if (mouse.RightButton == ButtonState.Pressed && keyboard.IsKeyDown(Keys.LeftShift))
+            {
+                return MouseAction.Hold;
             }
 
-            if (mouse.RightButton == ButtonState.Released && RightPS == ButtonState.Pressed && isSwiping)
+            else if (mouse.RightButton == ButtonState.Released && rightPrevious == ButtonState.Pressed)
             {
-                myGame.SystemManager.sMovement.SetTarget(TList, TargetType.Swipe);
-                isSwiping = false;
-                FirstTime = true;
+                return MouseAction.Release;
             }
-            RightPS = mouse.RightButton;
+            else
+            {
+                return MouseAction.Empty;
+            }
         }
     }
 }

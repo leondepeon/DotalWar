@@ -93,7 +93,7 @@ namespace Dotal_War.Systems
 
                     SpawnedEntity.cBag[DataType.IsMoveValid] = true;
                     SpawnedEntity.cBag[DataType.TargetType] = TargetType.Individual;
-                    SpawnedEntity.cBag[DataType.Target] = SpawnLocation;
+                    SpawnedEntity.cBag[DataType.TargetList] = SpawnLocation;
 
                 }
 
