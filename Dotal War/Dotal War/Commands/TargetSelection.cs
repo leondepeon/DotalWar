@@ -42,7 +42,9 @@ namespace Dotal_War.Commands
             switch (rightAction)
             {
                 case MouseAction.Release:
+
                     TList.Add(mouseVector);
+                    
                     system.SetTarget(TList);
                     reset = true;
                     break;

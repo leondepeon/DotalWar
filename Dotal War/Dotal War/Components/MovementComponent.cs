@@ -20,12 +20,7 @@ namespace Dotal_War.Components
         {
             if (!target.cBag.ContainsKey(DataType.Speed))
             {
-                target.cBag.Add(DataType.Speed, InitialValue);
-            }
-
-            if (!target.cBag.ContainsKey(DataType.TargetIndex))
-            {
-                target.cBag.Add(DataType.TargetIndex, 0);
+                target.cBag.Add(DataType.Speed, 0f);
             }
 
             if (!target.cBag.ContainsKey(DataType.IsMoveValid))
@@ -36,11 +31,6 @@ namespace Dotal_War.Components
             if (!target.cBag.ContainsKey(DataType.TargetList))
             {
                 target.cBag.Add(DataType.TargetList, new List<Vector2>());
-            }
-
-            if (!target.cBag.ContainsKey(DataType.TargetType))
-            {
-                target.cBag.Add(DataType.TargetType, TargetType.Empty);
             }
 
             if (!target.cBag.ContainsKey(DataType.Rotation))

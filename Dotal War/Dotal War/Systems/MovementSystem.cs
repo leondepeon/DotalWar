@@ -16,8 +16,18 @@ namespace Dotal_War.Systems
         EntityManager EntityManager;
         Entity updatingEntity;
         GlobalVariables GlobalVariables;
-        
-
+        //***NEW***
+        List<Entity> entities;
+        List<Vector2> targetList;
+        Vector2 position;
+        Vector2 velocity;
+        Vector2 direction;
+        Vector2 target;
+        float acceleration = 5f;
+        float speed;
+        float speedLimit = 20f;
+        float rotation;
+        bool moveValid;
         #endregion
 
         #region Methodes
@@ -64,83 +74,69 @@ namespace Dotal_War.Systems
         }
 
 
-        public void RunSystem()
+        public void RunSystem(GameTime gameTime)
         {
-            foreach (int subs in Subscribtions)
+            foreach (int sub in Subscribtions)
             {
-                #region Load Data
-                updatingEntity = EntityManager.GetEntity(subs);
+                entities.Add(EntityManager.GetEntity(sub));
+            }
 
-                Vector2 position = (Vector2)(updatingEntity.cBag[DataType.Position]);
-                Vector2 EntityTarget = new Vector2();
-                Rectangle EntityRectangle = (Rectangle)(updatingEntity.cBag[DataType.DrawRectangle]);
-                List<Vector2> EntityTargetList = (List<Vector2>)(updatingEntity.cBag[DataType.TargetList]);
-                TargetType EntityTType = (TargetType)(updatingEntity.cBag[DataType.TargetType]);
-                int currentIndex = (int)(updatingEntity.cBag[DataType.TargetIndex]);
-                float EntitySpeed = (float)(updatingEntity.cBag[DataType.Speed]);
-                bool IsMoveValid = (bool)(updatingEntity.cBag[DataType.IsMoveValid]);
-
+            foreach (Entity subject in entities)
+            {
+                #region Load
+                position = (Vector2)subject.cBag[DataType.Position];
+                velocity = (Vector2)subject.cBag[DataType.Velocity];
+                direction = (Vector2)subject.cBag[DataType.Direction];
+                targetList = ((List<Vector2>)(subject.cBag[DataType.TargetList]));
+                target = targetList[0];
+                speed = (float)subject.cBag[DataType.Speed];
+                rotation = (float)subject.cBag[DataType.Rotation];
+                moveValid = (bool)subject.cBag[DataType.IsMoveValid];
                 #endregion
 
-                #region Update movement and Rotation
-
-                Vector2 EntityDirection = new Vector2();
-                float rotation = 0f;
-
-                if (EntityTargetList.Count != 0)
+                #region Update
+                if (moveValid)
                 {
-                EntityTarget = EntityTargetList[0];
-                    // calculates direction and rotation of entity
-                EntityDirection = new Vector2(EntityTarget.X - position.X, EntityTarget.Y - position.Y);
-                rotation = (float)Math.Atan2(EntityDirection.Y, EntityDirection.X);
-                EntityDirection.Normalize();
-                    IsMoveValid = true;
-                }
+                    speed += acceleration * gameTime.ElapsedGameTime.Milliseconds / 1000;
+                    speed = SpeedLimiter(speed, speedLimit);
+                    velocity = direction * speed;
+                    position += velocity * gameTime.ElapsedGameTime.Milliseconds / 1000;
+                    rotation = (float)Math.Atan2(velocity.Y, velocity.X);
 
-
-
-
-
-                // updates movement
-                if (IsMoveValid)
-                {
-                    position += (EntityDirection * EntitySpeed);
-                    EntityRectangle.X = (int)(position.X - ((Texture2D)(updatingEntity.cBag[DataType.Sprite])).Width);
-                    EntityRectangle.Y = (int)(position.Y - ((Texture2D)(updatingEntity.cBag[DataType.Sprite])).Height);
-                }
-
-                // checks whether entity has a healthbar and updates its position
-                if (updatingEntity.cBag.ContainsKey(DataType.HealthRectangle))
-                {
-                    Rectangle EntityHPRectangle = (Rectangle)(updatingEntity.cBag[DataType.HealthRectangle]);
-                    EntityHPRectangle.X = (int)(position.X - EntityHPRectangle.Width / 2);
-                    EntityHPRectangle.Y = (int)(position.Y - 20);
-                    updatingEntity.cBag[DataType.HealthRectangle] = EntityHPRectangle;
-                }
-
-                // case the entity is close to its target it acts acording to its target type
-                if ((EntityTarget - position).Length() <= 2)
-                {
-                    EntityTargetList.Remove(EntityTarget);
-
-
-                    if (EntityTargetList.Count == 0)
+                    float d = (float)Vector2.Distance(target, position);
+                    if (d <= 2)
                     {
-                        updatingEntity.cBag[DataType.IsMoveValid] = false;
+                        speed = 0;
+                        velocity = Vector2.Zero;
+                        direction = Vector2.Zero;
+                        moveValid = false;
+                        targetList.Remove(target);
                     }
-
-
                 }
                 #endregion
 
-                #region Update Data
-
-                updatingEntity.cBag[DataType.Position] = position;
-                updatingEntity.cBag[DataType.Rotation] = rotation;
-                updatingEntity.cBag[DataType.DrawRectangle] = EntityRectangle;
-                updatingEntity.cBag[DataType.TargetList] = EntityTargetList;
-
+                #region Unload
+                subject.cBag[DataType.Position] = position;
+                subject.cBag[DataType.Velocity] = velocity;
+                subject.cBag[DataType.Direction] = direction;
+                subject.cBag[DataType.TargetList] = targetList;
+                subject.cBag[DataType.Speed] = speed;
+                subject.cBag[DataType.Rotation] = rotation;
+                subject.cBag[DataType.IsMoveValid] = moveValid;
                 #endregion
+            }
+
+        }
+
+        private float SpeedLimiter(float speed, float speedLimit)
+        {
+            if (speed > speedLimit)
+            {
+                return speedLimit;
+            }
+            else
+            {
+                return speed;
             }
         }
 

@@ -12,6 +12,8 @@
         #region Vectors
 
         Position,
+        Direction,
+        Velocity,
         SpawnLocation,
         
 
