@@ -35,6 +35,7 @@
         Rotation,
         SpawnTime,
         CurrentTime,
+        Time,
 
         #endregion
 

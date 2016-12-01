@@ -143,7 +143,7 @@ namespace Dotal_War
                     firstPlayer.handleInput();
                     targetSelection.RunTarget();
                     TestSelect.Run(mouse);
-                    SystemManager.Run();
+                    SystemManager.Run(gameTime);
                     break;
 
             }
@@ -159,7 +159,7 @@ namespace Dotal_War
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Aquamarine);
 
             spriteBatch.Begin();
             switch (CurrentGameState)

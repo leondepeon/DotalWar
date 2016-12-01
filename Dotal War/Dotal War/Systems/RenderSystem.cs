@@ -85,18 +85,18 @@ namespace Dotal_War.Systems
                                 SpawnPoint = (Vector2)(updatingEntity.cBag[DataType.SpawnLocation]);
                                 //Top
                                 spriteBatch.Draw(Piksel, new Rectangle(SpawnRadius.X, SpawnRadius.Y,
-                                    SpawnRadius.Width, 2), Color.Black);
+                                    SpawnRadius.Width, 2), Color.White);
                                 //Left
                                 spriteBatch.Draw(Piksel, new Rectangle(SpawnRadius.X, SpawnRadius.Y,
-                                    2, SpawnRadius.Height), Color.Black);
+                                    2, SpawnRadius.Height), Color.White);
                                 //Bottom
                                 spriteBatch.Draw(Piksel, new Rectangle(SpawnRadius.X, (SpawnRadius.Y + SpawnRadius.Height),
-                                    SpawnRadius.Width + 2, 2), Color.Black);
+                                    SpawnRadius.Width + 2, 2), Color.White);
                                 //Right
                                 spriteBatch.Draw(Piksel, new Rectangle((SpawnRadius.X + SpawnRadius.Width),
-                                    SpawnRadius.Y, 2, SpawnRadius.Height), Color.Black);
+                                    SpawnRadius.Y, 2, SpawnRadius.Height), Color.White);
 
-                                spriteBatch.Draw(Piksel, SpawnPoint, Color.Black);
+                                spriteBatch.Draw(Piksel, SpawnPoint, Color.White);
 
                             }
                             break;
@@ -116,6 +116,7 @@ namespace Dotal_War.Systems
                 spriteBatch.Draw(RenderSprite, Renderposition, null, RenderColor, RenderRotation, new Vector2(RenderSprite.Width/2,RenderSprite.Height/2),
                    globalVariables.universalScaleFactor , SpriteEffects.None, 0);
 
+                //spriteBatch.Draw(Piksel, (Rectangle)(updatingEntity.cBag[DataType.DrawRectangle]), Color.Black);
 
                 updatingEntity = null;
             }

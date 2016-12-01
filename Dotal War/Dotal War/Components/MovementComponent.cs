@@ -18,6 +18,11 @@ namespace Dotal_War.Components
 
         void IComponent.AddComponent(Entity target, object InitialValue)
         {
+            if (!target.cBag.ContainsKey(DataType.Velocity))
+            {
+                target.cBag.Add(DataType.Velocity, new Vector2());
+            }
+
             if (!target.cBag.ContainsKey(DataType.Speed))
             {
                 target.cBag.Add(DataType.Speed, 0f);
@@ -36,6 +41,11 @@ namespace Dotal_War.Components
             if (!target.cBag.ContainsKey(DataType.Rotation))
             {
                 target.cBag.Add(DataType.Rotation, 0f);
+            }
+
+            if(!target.cBag.ContainsKey(DataType.Time))
+            {
+                target.cBag.Add(DataType.Time, 0f);
             }
 
             mySystem.Subscribe(target.entityID);

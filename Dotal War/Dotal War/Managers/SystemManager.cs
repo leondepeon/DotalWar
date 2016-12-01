@@ -1,13 +1,12 @@
 ﻿using DotalWar;
 using Dotal_War.Systems;
-
+using Microsoft.Xna.Framework;
 
 namespace Dotal_War.Managers
 {
     public class SystemManager
     {
         Game1 myGame;
-
         #region System Instances
 
         // Declare Instances
@@ -22,7 +21,6 @@ namespace Dotal_War.Managers
         public SystemManager(Game1 myGame)
         {
             this.myGame = myGame;
-            
             // Initiate Instances
             sSelectionHandler = new SelectionHandlerSystem(myGame);
             sHealth = new HealthSystem(myGame);
@@ -31,12 +29,12 @@ namespace Dotal_War.Managers
             sCollision = new CollisionSystem(myGame);
         }
 
-        public void Run()
+        public void Run(GameTime gameTime)
         {
             //Run SystemInstances
             sSelectionHandler.RunSystem();
             sHealth.RunSystem();
-            sMovement.RunSystem();
+            sMovement.RunSystem(gameTime);
             sSpawn.RunSystem();
             sCollision.runSystem();
         }

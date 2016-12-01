@@ -47,7 +47,7 @@ namespace Dotal_War.Components
 
             if (!target.cBag.ContainsKey(DataType.defaultColor))
             {
-            target.cBag.Add(DataType.defaultColor, Color.Black);
+            target.cBag.Add(DataType.defaultColor, Color.White);
             }
 
             mySystem.Subscribe(target.entityID);
